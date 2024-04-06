@@ -6,7 +6,118 @@ While implementing methods in the Car class, you find yourself needing to differ
 1.	Explain the role and usage of the super keyword in Java. Provide examples illustrating how super can be used to access superclass members and invoke superclass constructors within a subclass like Car.
 2.	Describe the significance of the this keyword in Java and how it differs from super. 
 Give examples demonstrating the use of this to refer to instance variables and methods within the same class, and discuss scenarios where using this is necessary for disambiguation or clarification.
+Ans:-
+class Vehicle {
+    int maxSpeed = 100;
+    
+    void display() {
+        System.out.println("Maximum speed: " + maxSpeed);
+    }
+}
+
+class Car extends Vehicle {
+    int maxSpeed = 150;
+    
+    void display() {
+        super.display(); // Accessing superclass method
+        System.out.println("Car's maximum speed: " + maxSpeed);
+    }
+}
+
+class Vehicle {
+    int maxSpeed;
+    
+    Vehicle(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+}
+
+class Car extends Vehicle {
+    int numDoors;
+    
+    Car(int maxSpeed, int numDoors) {
+        super(maxSpeed); // Invoking superclass constructor
+        this.numDoors = numDoors;
+    }
+}
+class Car {
+    int maxSpeed;
+    
+    Car(int maxSpeed) {
+        this.maxSpeed = maxSpeed; // Using this to refer to instance variable
+    }
+    
+    void displayMaxSpeed() {
+        System.out.println("Max speed: " + this.maxSpeed); // Using this to refer to instance variable
+    }
+}
+class Car {
+    int maxSpeed;
+    int numDoors;
+    
+    Car(int maxSpeed, int numDoors) {
+        this.maxSpeed = maxSpeed;
+        this.numDoors = numDoors;
+    }
+    
+    Car(int maxSpeed) {
+        this(maxSpeed, 4); // Calling another constructor in the same class
+    }
+}
+
 
 Task-2: 
 a.	Recall the basic principles of exception handling in Java, give example of try-catch blocks and the handling of checked exception. 
 b.  Write a program to demonstrate Interface and implements multiple interface in a java.
+Ans:-
+1.
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Example {
+    public static void main(String[] args) {
+        try {
+            File file = new File("file.txt");
+            FileReader fr = new FileReader(file); // FileReader constructor can throw FileNotFoundException
+        } catch (IOException e) {
+            System.out.println("File not found or cannot be read.");
+            e.printStackTrace();
+        }
+    }
+}
+
+2.
+// Interface 1
+interface Animal {
+    void eat();
+}
+
+// Interface 2
+interface Mammal {
+    void sleep();
+}
+
+// Class implementing multiple interfaces
+class Dog implements Animal, Mammal {
+    public void eat() {
+        System.out.println("Dog is eating");
+    }
+
+    public void sleep() {
+        System.out.println("Dog is sleeping");
+    }
+
+    public void bark() {
+        System.out.println("Dog is barking");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.eat();
+        dog.sleep();
+        dog.bark();
+    }
+}
